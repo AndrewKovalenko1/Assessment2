@@ -14,7 +14,7 @@ public class RecipeUtils {
         System.out.println("Here you can " + (isCreation ? "create new" : "edit") + " recipe.");
 
         String menu = """
-                  Here you can create new recipe.
+                  Here you can create new or edit recipe.
                   You have to fill next fields. Type a number from menu to fill a field:
                   1 - Enter a recipe name
                   2 - Enter a description

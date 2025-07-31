@@ -16,14 +16,14 @@ public class Main {
                   3 - Search and show one recipe by name
                   4 - Edit recipe by name
                   5 - Delete recipe by name
-                  m - Menü anzeigen
-                  Jede andere Eingabe - Programm beenden
+                  m - Show menu
+                  Any key - End programm
                 \s""";
         System.out.print(menu);
         do {
             System.out.print("\nChoose option from Main menu: ");
-            String wahl = scanner.nextLine();
-            switch (wahl) {
+            String choice = scanner.nextLine();
+            switch (choice) {
                 case "1":
                     RecipeUtils.createEditRecipe(recipes, scanner, null);
                     break;
