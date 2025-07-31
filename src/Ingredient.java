@@ -30,9 +30,6 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return "Ingredient{" +
-                "name='" + name + '\'' +
-                ", quantity='" + quantity + '\'' +
-                '}';
+        return name + " — " + quantity;
     }
 }

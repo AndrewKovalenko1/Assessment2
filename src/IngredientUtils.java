@@ -52,7 +52,6 @@ public class IngredientUtils {
         } while (isContinued);
     }
 
-
     public static void createEditIngredient(List<Ingredient> ingredientList, Scanner scanner, Ingredient ingredient) {
 
         boolean isCreation = false;

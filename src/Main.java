@@ -28,8 +28,16 @@ public class Main {
                     RecipeUtils.createEditRecipe(recipes, scanner, null);
                     break;
                 case "2":
+                    System.out.println("Recipe list:");
+                    for(Recipe recipe : recipes) {
+                        System.out.print(recipe);
+                    }
                     break;
                 case "3":
+                    Recipe recipe = RecipeUtils.searchRecipeByName(recipes, scanner);
+                    if(recipe != null) {
+                        RecipeUtils.showRecipe(recipe);
+                    }
                     break;
                 case "4":
                     break;

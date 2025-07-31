@@ -71,4 +71,10 @@ public class Recipe {
     public void addStep(Step step) {
         this.steps.add(step);
     }
+
+    @Override
+    public String toString() {
+        return "Recipe '"+ name + "' , description:  '" + description + "', category: '" + category.getName() + "'";
+
+    }
 }

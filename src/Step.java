@@ -31,9 +31,6 @@ public class Step {
 
     @Override
     public String toString() {
-        return "Step{" +
-                "stepNumber=" + stepNumber +
-                ", instruction='" + instruction + '\'' +
-                '}';
+        return stepNumber + ". " + instruction;
     }
 }

@@ -1,5 +1,4 @@
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class RecipeUtils {
     public static void createEditRecipe(List<Recipe> recipeList, Scanner scanner, Recipe recipe) {
@@ -55,7 +54,6 @@ public class RecipeUtils {
                     break;
                 case "s":
                     if (saveRecipeIfValid(recipe, recipeList, isCreation)) {
-                        //DataUtil.serialize(recipeList, "tours.ser");
                         isCompleted = true;
                         if (isCreation)  {
                             System.out.println("Recipe "+ recipe +" has been created.");
@@ -89,6 +87,46 @@ public class RecipeUtils {
 
         System.out.println("Tour was saved successfully: " + recipe);
         return true;
+
+    }
+
+    public static Recipe searchRecipeByName(List<Recipe> recipes, Scanner scanner) {
+        System.out.print("Please enter the name of the recipe you want to search: ");
+        String name = scanner.nextLine();
+        Optional<Recipe> recipe = recipes.stream().filter(t -> t.getName().equals(name))
+                .findFirst();
+        if (recipe.isPresent()) {
+            System.out.println("The recipe has been found!");
+            return recipe.get();
+        } else {
+            System.out.println("The recipe could not be found!");
+            return null;
+        }
+    }
+
+
+    public static void showRecipe(Recipe recipe) {
+        System.out.println(recipe +"\n");
+        System.out.println();
+        if (!recipe.getIngredients().isEmpty()) {
+            System.out.println("Ingredients:");
+            for (Ingredient ingredient : recipe.getIngredients()) {
+                System.out.println("    " + ingredient);
+            }
+            System.out.println();
+        }
+
+
+        if (!recipe.getSteps().isEmpty()) {
+            System.out.println("Steps:");
+
+            List<Step> sortedSteps = new ArrayList<>(recipe.getSteps());
+            sortedSteps.sort(Comparator.comparingInt(Step::getStepNumber));
+
+            for (Step step : recipe.getSteps()) {
+                System.out.println("    " + step);
+            }
+        }
 
     }
 }
