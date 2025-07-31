@@ -1,3 +1,7 @@
+import data.StartData;
+import model.Recipe;
+import util.RecipeUtils;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,9 +19,9 @@ public class Main {
                   2 - Show all recipes
                   3 - Search and show one recipe by name
                   4 - Edit recipe by name
-                  5 - Delete recipe by name
+                  5 - Delete recipe by name                
                   m - Show menu
-                  Any key - End programm
+                  Any other key - Exit programm
                 \s""";
         System.out.print(menu);
         do {
@@ -30,7 +34,7 @@ public class Main {
                 case "2":
                     System.out.println("Recipe list:");
                     for(Recipe recipe : recipes) {
-                        System.out.print(recipe);
+                        System.out.println(recipe);
                     }
                     break;
                 case "3":

@@ -1,3 +1,8 @@
+package util;
+
+import model.Recipe;
+import model.Step;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -7,7 +12,7 @@ public class StepUtils {
     public static void manipulateSteps(List<Step> steps, Scanner scanner, Recipe recipe) {
         boolean isContinued = true;
         String menu = """
-                  Manipulates with sreps menu
+                  Manipulates with steps menu
                   Choose an option:
                   1 - Create and add new step
                   2 - Show all steps
@@ -25,10 +30,15 @@ public class StepUtils {
                     createEditStep(steps, scanner, null);
                     break;
                 case "2":
-                    System.out.println("Steps of " + recipe.getName() + ":");
-                    for(Step step : steps) {
-                        System.out.println(step);
+                    if(!steps.isEmpty()) {
+                        System.out.println("Steps of " + recipe.getName() + ":");
+                        for(Step step : steps) {
+                            System.out.println(step);
+                        }
+                    } else {
+                        System.out.println("There are no steps in recipe " + recipe.getName());
                     }
+
                     break;
                 case "3":
                     Step step = searchStepByNumber(steps, scanner);
@@ -134,11 +144,20 @@ public class StepUtils {
             return false;
         }
 
+        boolean duplicateName = stepList.stream()
+                .anyMatch(s -> (s.getStepNumber() == step.getStepNumber())
+                        && (isCreation || s != step));
+
+        if (duplicateName) {
+            System.out.println("A step with the same number already exists. Please choose another one.");
+            return false;
+        }
+
         if (isCreation) {
             stepList.add(step);
         }
 
-        System.out.println("Ingredient was saved successfully: " + step);
+        System.out.println("Step was saved successfully: " + step);
         return true;
 
     }

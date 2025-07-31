@@ -1,3 +1,5 @@
+package model;
+
 public class Step {
 
     private int stepNumber;

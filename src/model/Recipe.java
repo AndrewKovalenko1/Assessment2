@@ -1,3 +1,7 @@
+package model;
+
+import enums.Category;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,13 +12,15 @@ public class Recipe {
     private String name;
     private String description;
     private Category category;
-    private List<Ingredient> ingredients;
-    private List<Step> steps;
+    private final List<Ingredient> ingredients;
+    private final List<Step> steps;
 
     public Recipe(String name, String description, Category category, List<Ingredient> ingredients, List<Step> steps) {
         this.name = name;
         this.description = description;
         this.category = category;
+        this.ingredients = ingredients;
+        this.steps = steps;
     }
 
     public Recipe() {
@@ -40,10 +46,6 @@ public class Recipe {
         this.description = description;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
     public void setCategory(String category) {
         Optional<Category> optCategory = Arrays.stream(Category.values())
                 .filter(cat -> cat.getName().equalsIgnoreCase(category))
@@ -60,21 +62,14 @@ public class Recipe {
         return ingredients;
     }
 
-    public void addIngredient(Ingredient ingredient) {
-        this.ingredients.add(ingredient);
-    }
-
-    public List<Step> getSteps() {
+   public List<Step> getSteps() {
         return steps;
-    }
-
-    public void addStep(Step step) {
-        this.steps.add(step);
     }
 
     @Override
     public String toString() {
-        return "Recipe '"+ name + "' , description:  '" + description + "', category: '" + category.getName() + "'";
+        String categoryName = (category != null) ? category.getName() : "no category";
+        return "Recipe '"+ name + "', description: '" + description + "', category: '" + categoryName + "'";
 
     }
 }

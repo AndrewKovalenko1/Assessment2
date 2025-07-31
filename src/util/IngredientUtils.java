@@ -1,3 +1,8 @@
+package util;
+
+import model.Ingredient;
+import model.Recipe;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -25,10 +30,15 @@ public class IngredientUtils {
                     createEditIngredient(ingredients, scanner, null);
                     break;
                 case "2":
-                    System.out.println("Ingredients of " + recipe.getName() + ":");
-                    for(Ingredient ingredient : ingredients) {
-                        System.out.println(ingredient);
+                    if(!ingredients.isEmpty()) {
+                        System.out.println("Ingredients of " + recipe.getName() + ":");
+                        for(Ingredient ingredient : ingredients) {
+                            System.out.println(ingredient);
+                        }
+                    } else {
+                        System.out.println("There are no ingredients in recipe " + recipe.getName());
                     }
+
                     break;
                 case "3":
                     Ingredient ingredient = searchIngredientByName(ingredients, scanner);
@@ -106,7 +116,6 @@ public class IngredientUtils {
                     break;
             }
         } while (!isCompleted && !isCanceled);
-
     }
 
     private static Ingredient searchIngredientByName(List<Ingredient> ingredients, Scanner scanner) {
@@ -131,6 +140,15 @@ public class IngredientUtils {
         }
         if (ingredient.getQuantity() == null || ingredient.getQuantity().isBlank()) {
             System.out.println("Ingredient quantity is required. Please enter the quantity.");
+            return false;
+        }
+
+        boolean duplicateName = ingredientList.stream()
+                .anyMatch(i -> i.getName().equalsIgnoreCase(ingredient.getName())
+                        && (isCreation || i != ingredient));
+
+        if (duplicateName) {
+            System.out.println("An ingredient with the same name already exists. Please choose another name.");
             return false;
         }
 

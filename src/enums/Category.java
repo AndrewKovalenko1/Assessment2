@@ -1,3 +1,5 @@
+package enums;
+
 public enum Category {
     BREAKFAST ("Breakfast"),
     DESSERT("Dessert"),

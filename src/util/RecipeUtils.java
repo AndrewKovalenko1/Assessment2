@@ -1,3 +1,8 @@
+package util;
+
+import model.Ingredient;
+import model.Recipe;
+import model.Step;
 import java.util.*;
 
 public class RecipeUtils {
@@ -81,6 +86,15 @@ public class RecipeUtils {
             return false;
         }
 
+        boolean duplicateName = recipeList.stream()
+                .anyMatch(r -> r.getName().equalsIgnoreCase(recipe.getName())
+                        && (isCreation || r != recipe));
+
+        if (duplicateName) {
+            System.out.println("A recipe with the same name already exists. Please choose another name.");
+            return false;
+        }
+
         if (isCreation) {
             recipeList.add(recipe);
         }
@@ -104,10 +118,10 @@ public class RecipeUtils {
         }
     }
 
-
     public static void showRecipe(Recipe recipe) {
-        System.out.println(recipe +"\n");
         System.out.println();
+        System.out.println(recipe +"\n");
+
         if (!recipe.getIngredients().isEmpty()) {
             System.out.println("Ingredients:");
             for (Ingredient ingredient : recipe.getIngredients()) {

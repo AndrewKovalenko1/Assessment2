@@ -1,3 +1,10 @@
+package data;
+
+import enums.Category;
+import model.Ingredient;
+import model.Recipe;
+import model.Step;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,7 +13,6 @@ public class StartData {
     public static List<Recipe> createSampleRecipes() {
         List<Recipe> recipes = new ArrayList<>();
 
-        // Recipe 1: Pancakes
         recipes.add(new Recipe(
                 "Pancakes",
                 "Fluffy pancakes for breakfast",
@@ -24,7 +30,6 @@ public class StartData {
                 )
         ));
 
-        // Recipe 2: Chocolate Cake
         recipes.add(new Recipe(
                 "Chocolate Cake",
                 "Rich and moist chocolate cake",
@@ -45,7 +50,6 @@ public class StartData {
                 )
         ));
 
-        // Recipe 3: Spaghetti Bolognese
         recipes.add(new Recipe(
                 "Spaghetti Bolognese",
                 "Classic Italian main dish with meat sauce",
