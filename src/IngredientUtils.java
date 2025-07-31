@@ -153,6 +153,5 @@ public class IngredientUtils {
         if (ingredientList.remove(ingredient)) {
             System.out.println("Ingredient removed successfully!");
         }
-
     }
 }

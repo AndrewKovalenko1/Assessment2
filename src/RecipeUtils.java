@@ -116,7 +116,6 @@ public class RecipeUtils {
             System.out.println();
         }
 
-
         if (!recipe.getSteps().isEmpty()) {
             System.out.println("Steps:");
 
@@ -127,6 +126,17 @@ public class RecipeUtils {
                 System.out.println("    " + step);
             }
         }
+    }
 
+    public static void deleteRecipe(List<Recipe> recipeList, Scanner scanner) {
+
+        Recipe recipe = searchRecipeByName(recipeList, scanner);
+        if (recipe == null) {
+            return;
+        }
+
+        if (recipeList.remove(recipe)) {
+            System.out.println("Recipe removed successfully!");
+        }
     }
 }

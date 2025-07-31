@@ -40,10 +40,13 @@ public class Main {
                     }
                     break;
                 case "4":
+                    Recipe recipeEdit = RecipeUtils.searchRecipeByName(recipes, scanner);
+                    if(recipeEdit != null) {
+                        RecipeUtils.createEditRecipe(recipes, scanner, recipeEdit);
+                    }
                     break;
                 case "5":
-                    break;
-                case "6":
+                    RecipeUtils.deleteRecipe(recipes, scanner);
                     break;
                 case "m":
                     System.out.println(menu);
