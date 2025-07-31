@@ -10,7 +10,7 @@ public class StartData {
         recipes.add(new Recipe(
                 "Pancakes",
                 "Fluffy pancakes for breakfast",
-                Categorie.BREAKFAST,
+                Category.BREAKFAST,
                 List.of(
                         new Ingredient("Flour", "200 g"),
                         new Ingredient("Milk", "300 ml"),
@@ -28,7 +28,7 @@ public class StartData {
         recipes.add(new Recipe(
                 "Chocolate Cake",
                 "Rich and moist chocolate cake",
-                Categorie.DESSERT,
+                Category.DESSERT,
                 List.of(
                         new Ingredient("Flour", "250 g"),
                         new Ingredient("Cocoa powder", "50 g"),
@@ -49,7 +49,7 @@ public class StartData {
         recipes.add(new Recipe(
                 "Spaghetti Bolognese",
                 "Classic Italian main dish with meat sauce",
-                Categorie.MAIN_DISH,
+                Category.MAIN_DISH,
                 List.of(
                         new Ingredient("Spaghetti", "300 g"),
                         new Ingredient("Ground beef", "400 g"),

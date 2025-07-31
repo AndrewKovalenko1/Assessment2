@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,6 +25,7 @@ public class Main {
             String wahl = scanner.nextLine();
             switch (wahl) {
                 case "1":
+                    RecipeUtils.createEditRecipe(recipes, scanner, null);
                     break;
                 case "2":
                     break;

@@ -1,15 +1,17 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class Recipe {
 
     private String name;
     private String description;
-    private Categorie category;
+    private Category category;
     private List<Ingredient> ingredients;
     private List<Step> steps;
 
-    public Recipe(String name, String description, Categorie category, List<Ingredient> ingredients, List<Step> steps) {
+    public Recipe(String name, String description, Category category, List<Ingredient> ingredients, List<Step> steps) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -38,12 +40,20 @@ public class Recipe {
         this.description = description;
     }
 
-    public Categorie getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(Categorie category) {
-        this.category = category;
+    public void setCategory(String category) {
+        Optional<Category> optCategory = Arrays.stream(Category.values())
+                .filter(cat -> cat.getName().equalsIgnoreCase(category))
+                .findFirst();
+        if (optCategory.isPresent()) {
+            this.category = optCategory.get();
+            System.out.println("You chose " +category);
+        } else {
+            System.out.println("Category is Not Found. Please try again.");
+        }
     }
 
     public List<Ingredient> getIngredients() {
