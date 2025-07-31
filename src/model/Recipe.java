@@ -66,6 +66,10 @@ public class Recipe {
         return steps;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
     @Override
     public String toString() {
         String categoryName = (category != null) ? category.getName() : "no category";

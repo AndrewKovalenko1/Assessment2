@@ -19,7 +19,8 @@ public class Main {
                   2 - Show all recipes
                   3 - Search and show one recipe by name
                   4 - Edit recipe by name
-                  5 - Delete recipe by name                
+                  5 - Delete recipe by name
+                  6 - Show recipes with filter
                   m - Show menu
                   Any other key - Exit programm
                 \s""";
@@ -51,6 +52,9 @@ public class Main {
                     break;
                 case "5":
                     RecipeUtils.deleteRecipe(recipes, scanner);
+                    break;
+                case "6":
+                    RecipeUtils.searchRecipesWithFilter(recipes, scanner);
                     break;
                 case "m":
                     System.out.println(menu);

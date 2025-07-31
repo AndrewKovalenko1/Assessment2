@@ -22,7 +22,7 @@ public class RecipeUtils {
                   You have to fill next fields. Type a number from menu to fill a field:
                   1 - Enter a recipe name
                   2 - Enter a description
-                  3 - Choose a categorie
+                  3 - Choose a category
                   4 - manipulate with ingredients (create, edit, delete)
                   5 - manipulate with steps (create, edit, delete)
                   m - Show menu
@@ -153,4 +153,114 @@ public class RecipeUtils {
             System.out.println("Recipe removed successfully!");
         }
     }
+
+    //region Filter
+    public static void searchRecipesWithFilter(List<Recipe> recipes, Scanner scanner) {
+        boolean isContinued = true;
+        String menu = """
+                  Filter menu
+                  Choose an option:
+                  1 - search recipes by name (partial match)
+                  2 - search recipes by ingredients (partial match)
+                  3 - search recipes by category (exact match)
+                  4 - show all recipes
+                  m - Show menu
+                  any key - exit from menu
+                \s""";
+        System.out.print(menu);
+        do {
+            System.out.print("\nChoose option from Filter menu: ");
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "1":
+                    searchRecipesByName(recipes, scanner);
+                    break;
+                case "2":
+                    searchRecipesByIngredients(recipes, scanner);
+                    break;
+                case "3":
+                    searchRecipesByCategory(recipes, scanner);
+                    break;
+                case "4":
+                    System.out.println("All recipes list: ");
+                    for(Recipe recipe : recipes) {
+                        showRecipe(recipe);
+                    }
+                    break;
+                case "m":
+                    System.out.println(menu);
+                    break;
+                default:
+                    isContinued = false;
+                    break;
+            }
+        } while (isContinued);
+    }
+
+    private static void searchRecipesByName(List<Recipe> recipes, Scanner scanner) {
+        String name = CommonMethods.createEditStringField("", "Recipe name", scanner);
+        if (name == null || name.isBlank()) {
+            System.out.println("You didnt enter a name. Search isn't possible");
+        } else {
+            name = name.toLowerCase().trim();
+            String finalName = name;
+            List<Recipe> filteredRecipes = recipes.stream().filter(recipe -> recipe.getName().toLowerCase()
+                    .contains(finalName)).toList();
+            if (!filteredRecipes.isEmpty()) {
+                System.out.println("Recipes whose names contain '" +name+ "':");
+                for (Recipe recipe : filteredRecipes) {
+                    System.out.println();
+                    showRecipe(recipe);
+                }
+            } else {
+                System.out.println("Recipes whose names contain '" +name+ "' do not exist");
+            }
+        }
+    }
+
+    private static void searchRecipesByIngredients(List<Recipe> recipes, Scanner scanner) {
+        String name = CommonMethods.createEditStringField("", "Ingredient name", scanner);
+        if (name == null || name.isBlank()) {
+            System.out.println("You didnt enter an ingredient name. Search isn't possible");
+        } else {
+            name = name.toLowerCase().trim();
+            String finalName = name;
+            List<Recipe> filteredRecipes = recipes.stream()
+                    .filter(recipe -> recipe.getIngredients().stream()
+                            .anyMatch(ingredient -> ingredient.getName().toLowerCase().contains(finalName)))
+                    .toList();
+            if (!filteredRecipes.isEmpty()) {
+                System.out.println("Recipes that contain ingredients whose names include '" +name+ "':");
+                for (Recipe recipe : filteredRecipes) {
+                    System.out.println();
+                    showRecipe(recipe);
+                }
+            } else {
+                System.out.println("Recipes that contain ingredients whose names include '" +name+ "' do not exist");
+            }
+        }
+    }
+
+    private static void searchRecipesByCategory(List<Recipe> recipes, Scanner scanner) {
+        String category = CommonMethods.createEditStringField("",
+                "Category (enter 'Breakfast', 'Dessert', 'Main Dish')", scanner);
+        if (category == null || category.isBlank()) {
+            System.out.println("You didnt enter a category. Search isn't possible");
+        } else {
+            category = category.toLowerCase().trim();
+            String finalCategory = category;
+            List<Recipe> filteredRecipes = recipes.stream()
+                    .filter(recipe -> recipe.getCategory().getName().toLowerCase().equals(finalCategory)).toList();
+            if (!filteredRecipes.isEmpty()) {
+                System.out.println("Recipes whose category is '" +category+ "':");
+                for (Recipe recipe : filteredRecipes) {
+                    System.out.println();
+                    showRecipe(recipe);
+                }
+            } else {
+                System.out.println("Recipes whose category is '" +category+ "' do not exist");
+            }
+        }
+    }
+    //endregion
 }
