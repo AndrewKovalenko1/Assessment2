@@ -1,17 +1,18 @@
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class IngredientUtils {
 
-    public static void manipulateIngredients(List<Ingredient> ingredients, Scanner scanner) {
+    public static void manipulateIngredients(List<Ingredient> ingredients, Scanner scanner, Recipe recipe) {
         boolean isContinued = true;
         String menu = """
                   Manipulates with ingredients menu
                   Choose an option:
                   1 - Create and add new ingredient
                   2 - Show all ingredients
-                  4 - Edit ingredient by name
-                  5 - Delete ingredient by name
+                  3 - Edit ingredient by name
+                  4 - Delete ingredient by name
                   m - Show menu
                   any key - exit from menu
                 \s""";
@@ -24,25 +25,33 @@ public class IngredientUtils {
                     createEditIngredient(ingredients, scanner, null);
                     break;
                 case "2":
+                    System.out.println("Ingredients of " + recipe.getName() + ":");
+                    for(Ingredient ingredient : ingredients) {
+                        System.out.println(ingredient);
+                    }
                     break;
                 case "3":
+                    Ingredient ingredient = searchIngredientByName(ingredients, scanner);
+                    if(ingredient != null) {
+                        System.out.println("Now you can edit ingredient: " + ingredient);
+                        createEditIngredient(ingredients, scanner, ingredient);
+                    } else {
+                        System.out.println("Ingredient not found!");
+                    }
                     break;
                 case "4":
+                    deleteIngredient(ingredients, scanner);
                     break;
-                case "5":
-                    break;
-                case "6":
-                    break;
-                case "m":
+                 case "m":
                     System.out.println(menu);
                     break;
                 default:
                     isContinued = false;
-
                     break;
             }
         } while (isContinued);
     }
+
 
     public static void createEditIngredient(List<Ingredient> ingredientList, Scanner scanner, Ingredient ingredient) {
 
@@ -65,7 +74,6 @@ public class IngredientUtils {
                   c - Cancel ingredient creation
                 \s""";
         System.out.print(menu);
-
 
         do {
             System.out.print("\nChoose a punkt from Create-Edit recipe menu: ");
@@ -102,6 +110,20 @@ public class IngredientUtils {
 
     }
 
+    private static Ingredient searchIngredientByName(List<Ingredient> ingredients, Scanner scanner) {
+        System.out.print("Please enter the name of the ingredient you want to search: ");
+        String name = scanner.nextLine();
+        Optional<Ingredient> ingredient = ingredients.stream().filter(t -> t.getName().equals(name))
+                .findFirst();
+        if (ingredient.isPresent()) {
+            System.out.println("The ingredient has been found!");
+            return ingredient.get();
+        } else {
+            System.out.println("The ingredient could not be found!");
+            return null;
+        }
+    }
+
     private static boolean saveIngredientIfValid(Ingredient ingredient, List<Ingredient> ingredientList, boolean isCreation) {
 
         if (ingredient.getName() == null || ingredient.getName().isBlank()) {
@@ -119,6 +141,19 @@ public class IngredientUtils {
 
         System.out.println("Ingredient was saved successfully: " + ingredient);
         return true;
+
+    }
+
+    private static void deleteIngredient(List<Ingredient> ingredientList, Scanner scanner) {
+
+        Ingredient ingredient = searchIngredientByName(ingredientList, scanner);
+        if (ingredient == null) {
+            return;
+        }
+
+        if (ingredientList.remove(ingredient)) {
+            System.out.println("Ingredient removed successfully!");
+        }
 
     }
 }

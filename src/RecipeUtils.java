@@ -44,7 +44,7 @@ public class RecipeUtils {
                     recipe.setCategory(category);
                     break;
                 case "4":
-                    recipe.setDescription(CommonMethods.createEditStringField(recipe.getDescription(), "Recipe Description", scanner));
+                    IngredientUtils.manipulateIngredients(recipe.getIngredients(), scanner, recipe);
                     break;
                 case "5":
                     recipe.setDescription(CommonMethods.createEditStringField(recipe.getDescription(), "Recipe Description", scanner));
