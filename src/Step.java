@@ -28,4 +28,12 @@ public class Step {
     public void setInstruction(String instruction) {
         this.instruction = instruction;
     }
+
+    @Override
+    public String toString() {
+        return "Step{" +
+                "stepNumber=" + stepNumber +
+                ", instruction='" + instruction + '\'' +
+                '}';
+    }
 }

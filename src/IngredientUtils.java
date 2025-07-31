@@ -18,7 +18,7 @@ public class IngredientUtils {
                 \s""";
         System.out.print(menu);
         do {
-            System.out.print("\nChoose option from Manipulate with ingredients menu menu: ");
+            System.out.print("\nChoose option from Manipulate with ingredients menu: ");
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
@@ -76,9 +76,9 @@ public class IngredientUtils {
         System.out.print(menu);
 
         do {
-            System.out.print("\nChoose a punkt from Create-Edit recipe menu: ");
-            String wahl = scanner.nextLine();
-            switch (wahl) {
+            System.out.print("\nChoose a punkt from Create-Edit ingredient menu: ");
+            String choice = scanner.nextLine();
+            switch (choice) {
                 case "1":
                     ingredient.setName(CommonMethods.createEditStringField(ingredient.getName(), "Ingredient name", scanner));
                     break;

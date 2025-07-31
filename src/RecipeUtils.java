@@ -47,7 +47,7 @@ public class RecipeUtils {
                     IngredientUtils.manipulateIngredients(recipe.getIngredients(), scanner, recipe);
                     break;
                 case "5":
-                    recipe.setDescription(CommonMethods.createEditStringField(recipe.getDescription(), "Recipe Description", scanner));
+                    StepUtils.manipulateSteps(recipe.getSteps(), scanner, recipe);
                     break;
 
                 case "m":
